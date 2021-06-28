@@ -12,4 +12,9 @@ public class TemplateController {
     public String getLoginView() {
         return "login";
     }
+
+    @GetMapping("welcome")
+    public String getWelcome() {
+        return "welcome";
+    }
 }
