@@ -1,17 +1,26 @@
 package com.example.demo.student;
 
+import javax.persistence.*;
+
+@Entity
 public class Student {
 
-    private final Integer studentId;
-    private final String studentName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;;
 
-    public Student(Integer studentId, String studentName) {
-        this.studentId = studentId;
+    @Column(name = "Name")
+    private String studentName;
+
+    public Student() {
+    }
+
+    public Student(String studentName) {
         this.studentName = studentName;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Long getId() {
+        return id;
     }
 
     public String getStudentName() {
@@ -21,7 +30,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "studentId=" + id +
                 ", studentName='" + studentName + '\'' +
                 '}';
     }

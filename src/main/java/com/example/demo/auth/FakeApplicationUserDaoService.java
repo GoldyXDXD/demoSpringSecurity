@@ -2,9 +2,12 @@ package com.example.demo.auth;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +30,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
     }
+
 
     private List<ApplicationUser> getApplicationUsers() {
         List<ApplicationUser> applicationUsers = Lists.newArrayList(
