@@ -13,15 +13,15 @@ import java.util.List;
 public class StudentController {
 
     private static final List<Student> STUDENTS = Arrays.asList(    //временно, пока список не привязан к БД
-            new Student(1, "Nikita Borzenkov"),
-            new Student(2, "Dungeon Master"),
-            new Student(3, "Zxc DeadInside")
+            new Student("Nikita Borzenkov"),
+            new Student("Dungeon Master"),
+            new Student("Zxc DeadInside")
     );
 
     @GetMapping(path = "{studentId}")
     public Student getStudent(@PathVariable("studentId") Integer studentId) {
         return STUDENTS.stream()
-                .filter(student -> studentId.equals(student.getStudentId()))
+                .filter(student -> studentId.equals(student.getId()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Student " + studentId + " doesn't exist"));
     }

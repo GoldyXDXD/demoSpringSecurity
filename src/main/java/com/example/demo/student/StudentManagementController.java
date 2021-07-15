@@ -11,32 +11,32 @@ import java.util.List;
 public class StudentManagementController {
 
     private final static List<Student> STUDENTS = Arrays.asList(    //временно, пока список не привязан к БД
-            new Student(1, "Nikita Borzenkov"),
-            new Student(2, "Dungeon Master"),
-            new Student(3, "Zxc DeadInside")
+            new Student("Nikita Borzenkov"),
+            new Student("Dungeon Master"),
+            new Student("Zxc DeadInside")
     );
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')")
     public List<Student> getAllStudents() {
         System.out.println("All students:");
         return STUDENTS;
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('student:write')")
+    @PreAuthorize("hasAuthority('STUDENT_WRITE')")
     public void registerNewStudent(@RequestBody Student student) {
         System.out.println(student + " registered");
     }
 
     @DeleteMapping(path = "{studentId}")
-    @PreAuthorize("hasAuthority('student:write')")
+    @PreAuthorize("hasAuthority('STUDENT_WRITE')")
     public void deleteStudents(@PathVariable("studentId") Integer studentId) {
         System.out.println("Student " + studentId + " deleted");
     }
 
     @PutMapping(path = "{studentId}")
-    @PreAuthorize("hasAuthority('student:write')")
+    @PreAuthorize("hasAuthority('STUDENT_READ')")
     public void updateStudent(@PathVariable("studentId") Integer studentId, @RequestBody Student student) {
         System.out.println("Updated " + student + " " + studentId);
     }
